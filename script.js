@@ -9,12 +9,13 @@ By the end of the lab, there shouldn't be any question marks left on the report 
 */
 
 const studentInformation = {
-  name: "FILL_IN_YOUR_NAME_HERE",
-  grade: "FILL_IN_YOUR_GRADE_HERE",
-  advisor: "FILL_IN_YOUR_ADVISOR_HERE",
-  major: "FILL_IN_YOUR_MAJOR_HERE",
-  graduationYear: "FILL_IN_YOUR_GRADUATION_YEAR_HERE",
-  imageUrl: "ADD_A_URL_TO_ANY_IMAGE_HERE",
+  name: "Stella Kim",
+  grade: "A+++++++",
+  advisor: "Pancake",
+  major: "Computer Science",
+  graduationYear: "2023",
+  imageUrl: "https://media.sketchfab.com/models/49efaa2c91094e4ab3c8184d2ec537a9/thumbnails/b0b040369cc541719272d827e328e643/7f49e2acb05a4beab23e908069e2ca22.jpeg",
+
 }
 
 let semester = "Spring Semester"
@@ -58,7 +59,25 @@ const gpaPointsLookup = {
  * QUERY SELECTORS VARIABLES GO HERE
  */
 const dropdown = document.querySelector(".dropdown")
+
 // ADD more query selectors here
+
+const student_name = document.querySelector("#student-name")
+const student_advisor = document.querySelector("#student-advisor")
+const student_major = document.querySelector("#student-major")
+const student_grade = document.querySelector("#student-grade-level")
+const student_year = document.querySelector("#student-graduation-year")
+const student_img = document.querySelector("#student-image")
+
+const semesterDropdown = document.querySelector(".semester-dropdown")
+const dropdownBtn = document.querySelector(".dropdown-button")
+const dropdownLabel = document.querySelector(".dropdown-label")
+
+const fallSem = document.querySelector("#fall-semester")
+const springSem = document.querySelector("#spring-semester")
+const winterSem = document.querySelector("#winter-term")
+
+const reportCardTable = document.querySelector(".report-card-table")
 
 /**
  * Modify the report card to display the correct grade level from the lookup table above.
@@ -67,6 +86,8 @@ const dropdown = document.querySelector(".dropdown")
  */
 function updateStudentName(studentName) {
   // code goes here
+  studentName == studentInformation.name;
+  student_name.innerHTML = studentName;
 }
 
 /**
@@ -76,6 +97,8 @@ function updateStudentName(studentName) {
  */
 function updateStudentGradeLevel(studentGradeLevel) {
   // code goes here
+  studentGradeLevel == studentInformation.grade;
+  student_grade.innerHTML = studentGradeLevel;
 }
 
 /**
@@ -85,6 +108,8 @@ function updateStudentGradeLevel(studentGradeLevel) {
  */
 function updateStudentAdvisor(studentAdvisor) {
   // code goes here
+  studentAdvisor == studentInformation.advisor;
+  student_advisor.innerHTML = studentAdvisor;
 }
 
 /**
@@ -94,6 +119,8 @@ function updateStudentAdvisor(studentAdvisor) {
  */
 function updateMajor(studentMajor) {
   // code goes here
+  studentMajor == studentInformation.major;
+  student_major.innerHTML = studentMajor;
 }
 
 /**
@@ -103,6 +130,8 @@ function updateMajor(studentMajor) {
  */
 function updateStudentGraduationYear(graduationyear) {
   // code goes here
+  graduationyear == studentInformation.graduationYear;
+  student_year.innerHTML = graduationyear;
 }
 
 /**
@@ -113,6 +142,8 @@ function updateStudentGraduationYear(graduationyear) {
  */
 function updateStudentImage(imageUrl) {
   // code goes here
+  imageUrl == studentInformation.imageUrl;
+  student_img.src = imageUrl;
 }
 
 /**
@@ -132,7 +163,14 @@ function populateStudentInfo({ name, grade, advisor, major, graduationYear, imag
  */
 function addReportCardHeaders() {
   // update the code here
-  reportCardTable.innerHTML += ``
+  reportCardTable.innerHTML += `
+    <div class="table-header">
+      <h4> Code</h4>
+      <h4> Name </h4>
+      <h4> Credits </h4>
+      <h4>Letter</h4>
+    </div>
+  `
 }
 
 /**
@@ -145,7 +183,13 @@ function addReportCardHeaders() {
 function addCourseRowToReportCard(course, rowNum) {
   // update the code here with information about the course passed to this function
   reportCardTable.innerHTML += `
-    
+    <div class="table-row">
+      <h4 class="code-col">${course.code}</h4>
+      <h4 class="name-col">${course.name}</h4>
+      <h4 class="sen-col">${course.semester}</h4>
+      <h4 class="credits-col">${course.credits}</h4>
+      <h4 class="code-col">${course.grade}</h4>
+    </div>
   `
 }
 
@@ -159,6 +203,9 @@ function updateReportCard() {
   reportCardTable.innerHTML = ``
 
   // add your code here
+  springVal = studentData[semester];
+  addReportCardHeaders();
+  springVal.forEach(element => addCourseRowToReportCard(element));
 
 
 }
@@ -192,4 +239,6 @@ function updateDropdownLabel() {
 */
 window.onload = function () {
   // run your function here to make it execute as soon as the page loads
+  populateStudentInfo(studentInformation);
+  updateReportCard();
 }
